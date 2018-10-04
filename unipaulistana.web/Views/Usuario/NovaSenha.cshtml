@@ -1,0 +1,47 @@
+@model unipaulistana.model.NovaSenha
+
+<br/>
+
+@Html.Partial("_ErrorSummary")
+
+<div class="content">
+	<div class="module">
+		<div class="module-head">
+			<h3>Atualizar senha</h3>
+		</div>
+		<div class="module-body">
+			<form asp-action="NovaSenha" class="form-horizontal row-fluid">
+				<div class="control-group">
+					<label class="control-label" asp-for="SenhaAnterior">Senha atual</label>
+					<div class="controls">
+						<input type="password" asp-for="SenhaAnterior" type="text" id="basicinput" placeholder="senha atual" class="span8">
+						<span asp-validation-for="SenhaAnterior" class="text-danger"></span>
+					</div>
+				</div>
+                <div class="control-group">
+					<label class="control-label" asp-for="Senha">Senha</label>
+					<div class="controls">
+						<input type="password" asp-for="Senha" type="text" id="basicinput" placeholder="senha" class="span8">
+						<span asp-validation-for="Senha" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" asp-for="ConfirmarSenha">Confirmar senha</label>
+					<div class="controls">
+						<input type="password" asp-for="ConfirmarSenha" type="text" id="basicinput" placeholder="confirmar senha" class="span8">
+						<span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>				
+</div><!--/.content-->
+		
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

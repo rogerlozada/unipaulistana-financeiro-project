@@ -1,0 +1,31 @@
+@using unipaulistana.web.extensions
+
+<br/>
+<br/>
+
+
+
+<a href="#" class="dropdown-toggle">
+    <img src="@Html.Raw(Url.Content("~/images/" + @User.GetPicture()))" class="nav-avatar" />
+</a>
+
+<br/>
+<br/>
+
+@if(TempData["mensagem"] != null){
+    <p style="color:red;">@TempData["mensagem"]</p>
+}
+
+<form method="post" enctype="multipart/form-data" asp-controller="Usuario" asp-action="ImagemUsuario">
+    <div class="form-group">
+        <div class="col-md-10">
+            <p>Alterar imagem:</p>
+            <input type="file" name="files" accept="image/x-png,image/gif,image/jpeg" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Upload" />
+        </div>
+    </div>
+</form>

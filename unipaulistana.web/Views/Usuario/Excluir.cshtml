@@ -1,0 +1,53 @@
+@model unipaulistana.model.Usuario
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<br />
+@Html.Partial("_ErrorSummary")
+<div class="col-lg-12">
+    <div class="ibox">
+   
+      <h5 class="titulo">Tem certeza de que deseja excluir esse registro ?</h5>
+        <div class="ibox-content">
+          <br /><br />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+
+                 <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+            </dl>
+
+            <form asp-action="Excluir" method="POST">
+                @Html.HiddenFor(x => x.UsuarioID)
+                @Html.HiddenFor(x => x.Nome)
+                @Html.HiddenFor(x => x.Email)
+
+               <div class="rodapebtn">
+                       <hr />
+                    <input type="submit" id="btnExcluir" value="Confirmar Exclusão" class="btn btn-danger" />
+                </div>
+            </form>
+
+            <br />
+            <br />
+            <br />
+            <div class="form-group">
+                <a class="btn btn-primary" asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear:both" ></div>

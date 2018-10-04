@@ -1,0 +1,73 @@
+@model unipaulistana.model.Usuario
+
+<br/>
+<div>
+    <a class="btn btn-primary" asp-action="Index">Voltar</a>
+</div>
+<br/>
+
+
+@Html.Partial("_ErrorSummary")
+
+<div class="content">
+	<div class="module">
+		<div class="module-head">
+			<h3>Inserir novo usuário</h3>
+		</div>
+		<div class="module-body">
+			<form asp-action="Criar" class="form-horizontal row-fluid">
+				<div class="control-group">
+					<label class="control-label" asp-for="Nome">Nome</label>
+					<div class="controls">
+						<input asp-for="Nome" type="text" id="basicinput" placeholder="nome" class="span8">
+						<span asp-validation-for="Nome" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" asp-for="Email">Email</label>
+					<div class="controls">
+						<input type="email" asp-for="Email" type="text" id="basicinput" placeholder="email" class="span8">
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" asp-for="Email">Departamento</label>
+					<div class="controls">
+						<select asp-for="DepartamentoID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarDepartamentos,"DepartamentoID", "Nome"))"></select>
+						<span asp-validation-for="DepartamentoID" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" asp-for="Email">Grupo de segurança</label>
+					<div class="controls">
+						<select asp-for="GrupoDeSegurancaID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarGruposDeSeguranca,"GrupoDeSegurancaID", "Nome"))"></select>
+						<span asp-validation-for="GrupoDeSegurancaID" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" asp-for="Senha">Senha</label>
+					<div class="controls">
+						<input type="password" asp-for="Senha" type="text" id="basicinput" placeholder="senha" class="span8">
+						<span asp-validation-for="Senha" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" asp-for="ConfirmarSenha">Confirmar senha</label>
+					<div class="controls">
+						<input type="password" asp-for="ConfirmarSenha" type="text" id="basicinput" placeholder="confirmar senha" class="span8">
+						<span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>				
+</div><!--/.content-->
+		
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

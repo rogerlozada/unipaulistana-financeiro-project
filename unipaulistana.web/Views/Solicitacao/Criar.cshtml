@@ -1,0 +1,55 @@
+@model unipaulistana.model.Solicitacao
+
+<br/>
+<div>
+    <a class="btn btn-primary" asp-action="Index">Voltar</a>
+</div>
+<br/>
+
+
+@Html.Partial("_ErrorSummary")
+
+<div class="content">
+	<div class="module">
+		<div class="module-head">
+			<h3>Criar nova solicitação</h3>
+		</div>
+		<div class="module-body">
+			<form asp-action="Criar" class="form-horizontal row-fluid">
+				<div class="control-group">
+					<label class="control-label" asp-for="ClienteID">Cliente</label>
+					<div class="controls">
+						<select asp-for="ClienteID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarCliente,"ClienteID", "Nome"))"></select>
+						<span asp-validation-for="ClienteID" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" asp-for="DepartamentoID">Departamento</label>
+					<div class="controls">
+						<select asp-for="DepartamentoID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarDepartamentos,"DepartamentoID", "Nome"))"></select>
+						<span asp-validation-for="DepartamentoID" class="text-danger"></span>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" asp-for="Descricao">Descrição</label>
+					<div class="controls">
+						<textarea asp-for="Descricao" type="text" id="basicinput" placeholder="descrição" class="span8" rows="5"></textarea>
+						<span asp-validation-for="Descricao" class="text-danger"></span>
+					</div>
+				</div>
+			
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>				
+</div><!--/.content-->
+		
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

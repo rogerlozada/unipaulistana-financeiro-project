@@ -1,0 +1,140 @@
+@model unipaulistana.model.Solicitacao
+
+<br/>
+<div>
+    <a class="btn btn-primary" asp-action="Index">Voltar</a>
+</div>
+<br/>
+
+
+@Html.Partial("_ErrorSummary")
+
+<div class="content">
+	<div class="module">
+		<div class="module-head">
+			<h3>Alterar solicitação</h3>
+		</div>
+		<div class="module-body">
+			<form asp-action="Alterar" class="form-horizontal row-fluid">
+				
+                <input type="hidden" asp-for="SolicitacaoID" />
+                <div class="control-group">
+					<label class="control-label" asp-for="DataDeCriacao">Data</label>
+					<div class="controls">
+						<input asp-for="DataDeCriacao" type="text" id="basicinput" class="span8" disabled>
+					</div>
+				</div>
+
+                 <div class="control-group">
+					<label class="control-label" asp-for="SolicitanteID">Solicitante</label>
+					<div class="controls">
+						<select asp-for="SolicitanteID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarUsuarios,"UsuarioID", "Nome"))" disabled></select>
+						<span asp-validation-for="SolicitanteID" class="text-danger"></span>
+					</div>
+				</div>
+
+                <div class="control-group">
+					<label class="control-label" asp-for="ClienteID">Cliente</label>
+					<div class="controls">
+						<select asp-for="ClienteID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarCliente,"ClienteID", "Nome"))"></select>
+						<span asp-validation-for="ClienteID" class="text-danger"></span>
+					</div>
+				</div>
+                
+				<div class="control-group">
+					<label class="control-label" asp-for="DepartamentoID">Departamento</label>
+					<div class="controls">
+						<select asp-for="DepartamentoID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarDepartamentos,"DepartamentoID", "Nome"))"></select>
+						<span asp-validation-for="DepartamentoID" class="text-danger"></span>
+					</div>
+				</div>
+
+                 <div class="control-group">
+					<label class="control-label" asp-for="UsuarioID">Usuário</label>
+					<div class="controls">
+						<select asp-for="UsuarioID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarUsuarios,"UsuarioID", "Nome"))"></select>
+						<span asp-validation-for="UsuarioID" class="text-danger"></span>
+					</div>
+				</div>
+
+                <div class="control-group">
+					<label class="control-label" asp-for="Status">Status</label>
+					<div class="controls">
+						        <select class="form-dropdown"  onchange="AlterarCor(this.value)" asp-for="Status" asp-items="Html.GetEnumSelectList<unipaulistana.model.StatusSolicitacao>()">
+                                </select>
+						<span asp-validation-for="Status" class="text-danger"></span>
+					</div>
+				</div>
+
+				
+				<div class="control-group">
+					<label class="control-label" asp-for="Descricao">Descrição</label>
+					<div class="controls">
+						<textarea asp-for="Descricao" type="text" id="basicinput" placeholder="descrição" class="span8" rows="8"></textarea>
+						<span asp-validation-for="Descricao" class="text-danger"></span>
+					</div>
+				</div>
+			
+				@if((int)Model.Status != 4)
+				{
+					<div class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn">Salvar</button>
+						</div>
+					</div>
+				}
+
+				
+			</form>
+		</div>
+	</div>				
+</div><!--/.content-->
+
+	@if((int)Model.Status != 4)
+	{
+		@await Component.InvokeAsync("SolicitacaoItensInserir", new { solicitacaoID = Model.SolicitacaoID })
+	}
+
+@await Component.InvokeAsync("SolicitacaoItens", new { solicitacaoID = Model.SolicitacaoID })
+
+<script>
+        const nao_iniciado = 1;
+        const em_analise = 2;
+        const em_andamento = 3;
+        const concluido = 4;
+    
+    function AlterarCor(valor)
+    {
+        if(valor==nao_iniciado)
+	    {
+		    document.getElementById('Status').style.backgroundColor="red";
+	    }
+        else if(valor == em_analise)
+        {
+            document.getElementById('Status').style.backgroundColor="blue";
+        }
+        else if(valor == em_andamento)
+        {
+            document.getElementById('Status').style.backgroundColor="orange";
+        }
+        else if(valor == concluido)
+        {
+            document.getElementById('Status').style.backgroundColor="green";
+        }
+    }
+
+    function onloadPage() {
+        this.AlterarCor(document.getElementById('Status').value);
+    }
+    
+    window.onload = onloadPage;
+
+</script>
+
+<style>
+    .form-dropdown {
+        color: #ffffff !important;
+    }
+</style>
+
+

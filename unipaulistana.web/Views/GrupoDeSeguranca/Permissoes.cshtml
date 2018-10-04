@@ -1,0 +1,83 @@
+@model unipaulistana.model.DiretivaSeguranca
+
+<br/>
+<div>
+    <a class="btn btn-primary" asp-action="Index">Voltar</a>
+</div>
+<br/>
+
+<style>
+	h1 {
+  		color:  red;
+	}
+</style>
+
+<span>Grupo de segurança:<h1>@ViewBag.NomeDoGrupo</h1></span>
+
+@Html.Partial("_ErrorSummary")
+
+<div class="content">
+	<div class="module">
+		<div class="module-head">
+			<h3>Adicionar permissão</h3>
+		</div>
+		<div class="module-body">
+			<form asp-action="Permissoes" class="form-horizontal row-fluid">
+				
+                <input type="hidden" asp-for="GrupoSegurancaID" />
+			
+				
+				<div class="control-group">
+					<label class="control-label" asp-for="DiretivaSegurancaID">Diretiva</label>
+					<div class="controls">
+						<select asp-for="DiretivaSegurancaID" class="form-control" asp-items="@(new SelectList(@ViewBag.listaDeDiretivasNaoAssociadasAoGrupo,"DiretivaSegurancaID", "Nome"))"></select>
+						<span asp-validation-for="DiretivaSegurancaID" class="text-danger"></span>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn">Adicionar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>				
+</div><!--/.content-->
+
+ <div class="module-body table"> 
+        <table  cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped display" width="100%">  
+            <thead>  
+                <tr>
+                    <th>Nome</th>                      
+                    <th></th>  
+                </tr>  
+            </thead>  
+            <tbody>  
+                @foreach (var item in ViewBag.listaDeDiretivasAssociadasAoGrupo)  
+                {  
+                    <tr>  
+                        <td>@item.Nome</td>  
+                        <td>  
+                           @Html.ActionLink("Excluir", "RemoverPermissao", "GrupoDeSeguranca", new { grupoID=Model.GrupoSegurancaID, diretivaID=item.DiretivaSegurancaID }, new { @class="btn btn-danger" })
+                        </td>  
+                    </tr>  
+                }  
+            </tbody>  
+        </table>  
+        </div> 
+		
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script src="@Url.Content("~/js/datatables/jquery.dataTables.js")"></script>
+	<script>
+		$(document).ready(function() {
+			$('.datatable-1').dataTable();
+			$('.dataTables_paginate').addClass("btn-group datatable-pagination");
+			$('.dataTables_paginate > a').wrapInner('<span />');
+			$('.dataTables_paginate > a:first-child').append('<i class="icon-chevron-left shaded"></i>');
+			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
+		} );
+	</script>

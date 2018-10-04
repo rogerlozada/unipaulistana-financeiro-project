@@ -1,0 +1,41 @@
+@model unipaulistana.model.Departamento
+
+<br/>
+<div>
+    <a class="btn btn-primary" asp-action="Index">Voltar</a>
+</div>
+<br/>
+
+
+@Html.Partial("_ErrorSummary")
+
+
+<div class="content">
+	<div class="module">
+		<div class="module-head">
+			<h3>Inserir novo departamento</h3>
+		</div>
+		<div class="module-body">
+			<form asp-action="Criar" class="form-horizontal row-fluid">
+				
+				<div class="control-group">
+					<label class="control-label" asp-for="Nome">Nome</label>
+						<div class="controls">
+							<input asp-for="Nome" type="text" id="basicinput" placeholder="nome" class="span8">
+							<span asp-validation-for="Nome" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn">Salvar</button>
+						</div>
+					</div>
+			</form>
+		</div>
+	</div>				
+</div><!--/.content-->
+		
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
