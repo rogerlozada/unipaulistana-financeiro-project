@@ -86,7 +86,6 @@
             Dashboard dash = this.dashboardService.DashboardUsuario(User.GetUserID());
             ViewBag.TotalCliente = dash.TotalCliente;
             ViewBag.TotalUsuario = dash.TotalUsuario;
-            ViewBag.totalSolicitacaoEmAberto = dash.TotalSolicitacaoEmAberto;
         }
 
         public IActionResult AcessoNegado()

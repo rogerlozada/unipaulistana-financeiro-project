@@ -47,10 +47,10 @@
             services.AddScoped<IGrupoDeSegurancaService, GrupoDeSegurancaService>();
             services.AddScoped<IDiretivaSegurancaRepository, DiretivaSegurancaRepository>();
             services.AddScoped<IDiretivaSegurancaService, DiretivaSegurancaService>();
-            services.AddScoped<ISolicitacaoRepository, SolicitacaoRepository>();
-            services.AddScoped<ISolicitacaoService, SolicitacaoService>();
             services.AddScoped<IDashboardRepository, DashboardRepository>();
             services.AddScoped<IDashboardService, DashboardService>();
+            services.AddScoped<IFinanceiroRepository, FinanceiroRepository>();
+            services.AddScoped<IFinanceiroService, FinanceiroService>();
 
             services.AddAuthorization(options => {
                
@@ -81,10 +81,10 @@
                 options.AddPolicy("PermiteAssociarDiretivaGrupoDeSeguranca", policy=> policy.RequireClaim("PermiteAssociarDiretivaGrupoDeSeguranca")); 
 
                  //diretivas de solicitação
-                options.AddPolicy("PermiteListarSolicitacao", policy=> policy.RequireClaim("PermiteListarSolicitacao"));  
-                options.AddPolicy("PermiteCriarSolicitacao", policy=> policy.RequireClaim("PermiteCriarSolicitacao"));  
-                options.AddPolicy("PermiteAlterarSolicitacao", policy=> policy.RequireClaim("PermiteAlterarSolicitacao"));  
-                options.AddPolicy("PermiteConcluirSolicitacao", policy=> policy.RequireClaim("PermiteConcluirSolicitacao"));  
+                options.AddPolicy("PermiteListarFinanceiro", policy=> policy.RequireClaim("PermiteListarFinanceiro"));  
+                options.AddPolicy("PermiteCriarFinanceiro", policy=> policy.RequireClaim("PermiteCriarFinanceiro"));  
+                options.AddPolicy("PermiteAlterarFinanceiro", policy=> policy.RequireClaim("PermiteAlterarFinanceiro"));  
+                options.AddPolicy("PermiteConcluirFinanceiro", policy=> policy.RequireClaim("PermiteConcluirFinanceiro"));  
             });
         }
 

@@ -6,15 +6,13 @@ namespace unipaulistana.model
     public class Dashboard
     {
         public Dashboard(){}
-        public Dashboard(int totalUsuario, int totalCliente, int totalSolicitacaoEmAberto)
+        public Dashboard(int totalUsuario, int totalCliente)
         {
             this.TotalUsuario = totalUsuario;
             this.TotalCliente = totalCliente;
-            this.TotalSolicitacaoEmAberto = totalSolicitacaoEmAberto;
         }
 
         public int TotalUsuario { get; private set; }
         public int TotalCliente { get; private set; }
-        public int TotalSolicitacaoEmAberto { get; private set; }
     }
 }
