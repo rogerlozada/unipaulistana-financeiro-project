@@ -35,7 +35,16 @@ namespace unipaulistana.model
 
         
         [Required(ErrorMessage="O campo valor é obrigatório")]
-        public Double Valor { get; set; }
+        public Double Valor { 
+            get{
+                return this.valor;
+            }
+            set{
+                this.valor =value;
+            }
+        }
+
+        double valor = 0;
 
         
         [Required(ErrorMessage="O campo status é obrigatório")]

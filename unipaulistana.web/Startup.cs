@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authentication.Cookies;
@@ -90,6 +91,8 @@
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+
             app.UseAuthentication();  
 
             if (env.IsDevelopment())

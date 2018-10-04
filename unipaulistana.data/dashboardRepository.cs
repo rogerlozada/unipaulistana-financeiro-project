@@ -17,11 +17,8 @@ namespace unipaulistana.model
 
         public Dashboard DashboardUsuario(int usuarioID)
         {
-           string sql = string.Format(@"SELECT 
-                                        (SELECT COUNT(*) AS TotalUsuario FROM usuario) AS TotalUsuario,
-                                        (SELECT COUNT(*) AS TotalCliente FROM cliente) AS TotalCliente,
-                                        (SELECT COUNT(*) FROM solicitacao WHERE ClienteID = {0}
-                                    ", usuarioID);
+           string sql = @"SELECT (SELECT COUNT(*) AS TotalUsuario FROM usuario) AS TotalUsuario,
+                                 (SELECT COUNT(*) AS TotalCliente FROM cliente) AS TotalCliente";
 
             var cmd = new SqlCommand(sql, this.conexao.ObterConexao());
             SqlDataReader sqlDataReader = cmd.ExecuteReader();

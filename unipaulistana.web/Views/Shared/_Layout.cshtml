@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SAC - Sistema de atendimento ao cliente</title>
+    <title>Sistema de controle financeiro</title>
 
         <link type="text/css" href="@Url.Content("~/bootstrap/css/bootstrap.min.css")" rel="stylesheet">
         <link type="text/css" href="@Url.Content("~/bootstrap/css/bootstrap-responsive.min.css")" rel="stylesheet">
@@ -22,7 +22,7 @@
 				</a>
 
 			  	<a class="brand" href="@Url.Action("Dashboard", "Home")">
-			  		SAC - Sistema de atendimento ao cliente
+			  		Sistema de controle financeiro
 			  	</a>
 
 				<div class="nav-collapse collapse navbar-inverse-collapse">
@@ -50,6 +50,10 @@
 								@if(User.HasPermission("PermiteListarGrupoDeSeguranca"))
 								{
 									<li><a href="@Url.Action("Index", "GrupoDeSeguranca")">Grupo de segurança</a></li>
+								}
+								@if(User.HasPermission("PermiteListarFinanceiro"))
+								{
+									<li><a href="@Url.Action("Index", "Financeiro")">Financeiro</a></li>
 								}
 							</ul>
 						</li>
