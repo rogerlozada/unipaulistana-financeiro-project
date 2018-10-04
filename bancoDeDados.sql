@@ -68,6 +68,19 @@ BEGIN
 END
 GO
 
+IF (NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'financeiro'))
+BEGIN
+    CREATE TABLE financeiro (
+    financeiroID int IDENTITY(1,1) PRIMARY KEY,
+    DataDeVencimento DateTime NOT NULL,
+    Valor Float NOT NULL,
+    ClienteID INT NOT NULL,
+    Status INT NOT NULL,
+    FOREIGN KEY(ClienteID) REFERENCES cliente(ClienteID)
+);
+END
+GO
+
 IF (NOT EXISTS (SELECT * FROM grupoDeSeguranca WHERE nome = 'admin'))
 BEGIN
     INSERT INTO grupoDeSeguranca (nome) values ('admin')
