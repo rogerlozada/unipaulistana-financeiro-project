@@ -121,28 +121,28 @@ END
 GO
 
 
--- diretivas de solicitações
+-- diretivas de financeiro
 
-IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteListarSolicitacao'))
+IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteListarFinanceiro'))
 BEGIN
-    INSERT INTO diretivaSeguranca (nome) values ('PermiteListarSolicitacao')
+    INSERT INTO diretivaSeguranca (nome) values ('PermiteListarFinanceiro')
 END
 GO
 
-IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteCriarSolicitacao'))
+IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteCriarFinanceiro'))
 BEGIN
-    INSERT INTO diretivaSeguranca (nome) values ('PermiteCriarSolicitacao')
+    INSERT INTO diretivaSeguranca (nome) values ('PermiteCriarFinanceiro')
 END
 GO
 
-IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteAlterarSolicitacao'))
+IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteAlterarFinanceiro'))
 BEGIN
-    INSERT INTO diretivaSeguranca (nome) values ('PermiteAlterarSolicitacao')
+    INSERT INTO diretivaSeguranca (nome) values ('PermiteAlterarFinanceiro')
 END
 GO
 
-IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteConcluirSolicitacao'))
+IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteConcluirFinanceiro'))
 BEGIN
-    INSERT INTO diretivaSeguranca (nome) values ('PermiteConcluirSolicitacao')
+    INSERT INTO diretivaSeguranca (nome) values ('PermiteConcluirFinanceiro')
 END
 GO

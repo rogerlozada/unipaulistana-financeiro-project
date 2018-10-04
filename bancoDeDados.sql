@@ -68,44 +68,6 @@ BEGIN
 END
 GO
 
-
-IF (NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'solicitacao'))
-BEGIN
-    CREATE TABLE solicitacao (
-    SolicitacaoID int IDENTITY(1,1) PRIMARY KEY,
-    DataDeCriacao DATETIME NOT NULL,
-    DataDeConclusao DATETIME NULL,
-    Descricao TEXT,
-	ClienteID INT NOT NULL,
-    DepartamentoID INT NOT NULL,
-    SolicitanteID INT NOT NULL,
-    UsuarioID INT NOT NULL,
-    Status INT NOT NULL,
-    Concluido BIT NOT NULL DEFAULT 0,
-    FOREIGN KEY(ClienteID) REFERENCES cliente(ClienteID),
-	FOREIGN KEY(departamentoID) REFERENCES departamento(departamentoID),
-    FOREIGN KEY(usuarioID) REFERENCES usuario(usuarioID),
-    FOREIGN KEY(SolicitanteID) REFERENCES usuario(usuarioID)
-);
-END
-GO
-
-
-IF (NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'solicitacaoItem'))
-BEGIN
-    CREATE TABLE solicitacaoItem (
-    solicitacaoItemID int IDENTITY(1,1) PRIMARY KEY,
-    SolicitacaoID INT NOT NULL,
-    Data DATETIME NOT NULL,
-    Descricao TEXT,
-    usuarioID INT NOT NULL,
-    FOREIGN KEY(SolicitacaoID) REFERENCES solicitacao(SolicitacaoID),
-	FOREIGN KEY(usuarioID) REFERENCES usuario(usuarioID)
-);
-END
-GO
-
-
 IF (NOT EXISTS (SELECT * FROM grupoDeSeguranca WHERE nome = 'admin'))
 BEGIN
     INSERT INTO grupoDeSeguranca (nome) values ('admin')
