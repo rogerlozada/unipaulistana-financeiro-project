@@ -1,6 +1,35 @@
-﻿@model IEnumerable<unipaulistana.model.Financeiro>  
+﻿@model unipaulistana.model.FinanceiroFiltrar
 
 @using unipaulistana.web.extensions    
+
+<br/>
+
+<div class="content">
+	<div class="module">
+		<div class="module-head">
+			<h3>Pesquisar</h3>
+		</div>
+		<div class="module-body">
+			<form asp-action="Index" class="form-horizontal row-fluid">
+                <div class="control-group">
+					<label class="control-label" asp-for="Status">Status</label>
+					<div class="controls">
+						        <select class="form-dropdown"  asp-for="Status" asp-items="Html.GetEnumSelectList<unipaulistana.model.StatusTitulo>()">
+                                </select>
+						<span asp-validation-for="Status" class="text-danger"></span>
+					</div>
+				</div>
+				
+		
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-primary">Pesquisar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>				
+</div><!--/.content-->
 
 <br/>
 
@@ -39,13 +68,13 @@
                 </tr>  
             </thead>  
             <tbody>  
-                @foreach (var item in Model)  
+                @foreach (var item in ViewBag.ListarTitulos)  
                 {  
                     <tr>  
-                        <td>@Html.DisplayFor(modelItem => item.FinanceiroID)</td>  
-                        <td>@Html.DisplayFor(modelItem => item.Cliente.Nome)</td>  
-                        <td>@Html.DisplayFor(modelItem => item.DataDeVencimento)</td>  
-                        <td>@Html.DisplayFor(modelItem => item.Valor)</td>  
+                        <td>@item.FinanceiroID</td>  
+                        <td>@item.Cliente.Nome</td>  
+                        <td>@item.DataDeVencimento</td>  
+                        <td>@item.Valor</td>  
                         <td>  
                             
                             @if(User.HasPermission("PermiteAlterarFinanceiro")){
@@ -53,6 +82,7 @@
                                     <i class="glyphicon glyphicon-pencil"></i>  Alterar  
                                 </a>  
                             }
+                            
                             
                             @if(User.HasPermission("PermiteExcluirFinanceiro")){
                                 <a id="deleteCustomerModal" asp-action="Excluir" asp-route-id= "@item.FinanceiroID" class="btn btn-danger">  

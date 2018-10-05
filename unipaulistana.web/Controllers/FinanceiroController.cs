@@ -29,7 +29,15 @@ namespace unipaulistana.web.Controllers
                 ViewBag.Sucesso = TempData["mensagemIndex"];
             } 
 
-            return View(this.financeiroService.ObterTodos());
+            ViewBag.ListarTitulos = this.financeiroService.ObterTodos();
+            return View();
+        }
+
+         [HttpPost]
+        public IActionResult Index(FinanceiroFiltrar financeiroFiltrar)
+        {
+            ViewBag.ListarTitulos = this.financeiroService.Filtrar(financeiroFiltrar);
+            return View();
         }
         
         [Authorize(Policy="PermiteCriarFinanceiro")]
@@ -66,12 +74,14 @@ namespace unipaulistana.web.Controllers
                 ViewBag.Sucesso = TempData["mensagemEdicao"];
             } 
 
+            AtualizarListas();
             return View(this.financeiroService.ObterPorID(id));
         }
 
         [HttpPost]
         public IActionResult Alterar(Financeiro dados)
         {
+            AtualizarListas();
             if (!ModelState.IsValid)
                 return View(dados);
 

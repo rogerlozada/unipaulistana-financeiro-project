@@ -31,6 +31,9 @@ namespace unipaulistana.model
         public void Excluir(int financeiroID)
         {
             this.repository.Excluir(financeiroID);
-        } 
+        }
+
+        public IEnumerable<Financeiro> Filtrar(FinanceiroFiltrar filtrar)
+            => this.repository.Filtrar(filtrar);
     }
 }

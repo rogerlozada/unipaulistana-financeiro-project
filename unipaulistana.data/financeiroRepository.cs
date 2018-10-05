@@ -55,6 +55,34 @@ namespace unipaulistana.model
             return financeiro;
         }
 
+        public IEnumerable<Financeiro> Filtrar(FinanceiroFiltrar filtrar)
+        {
+            string sql = @"select a.financeiroID, a.DataDeVencimento, a.Valor, a.ClienteID, a.Status, b.nome as nomeCliente 
+                                        from financeiro a
+                                        inner join cliente b on (a.clienteID = b.ClienteID) where (1=1)";
+
+            if(filtrar.Status == StatusTitulo.em_aberto)
+                sql += string.Format("AND a.Status={0}",(int)StatusTitulo.em_aberto);
+
+            if(filtrar.Status == StatusTitulo.pago)
+                sql += string.Format("AND a.Status={0}",(int)StatusTitulo.pago);
+
+            if(filtrar.Status == StatusTitulo.vencida)
+                sql += string.Format("AND a.Status={0} AND a.DataDeVencimento < (select GetDate())",(int)StatusTitulo.em_aberto);
+
+            var cmd = new SqlCommand(sql, this.conexao.ObterConexao());
+
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            while (sqlDataReader.Read())
+                yield return new Financeiro( Convert.ToInt32(sqlDataReader.GetValue(0)),
+                                             Convert.ToDateTime(sqlDataReader.GetValue(1)),
+                                             Convert.ToDouble(sqlDataReader.GetValue(2)),
+                                             (StatusTitulo)Convert.ToInt32(sqlDataReader.GetValue(3)),
+                                             Convert.ToInt32(sqlDataReader.GetValue(4)),
+                                             sqlDataReader.GetValue(5).ToString());
+        }
+
         public void Adicionar(Financeiro financeiro)
         {
             string query = @"insert into dbo.financeiro (DataDeVencimento, Valor, ClienteID, Status) 

@@ -115,8 +115,8 @@ BEGIN
 END
 GO
 
-IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteConcluirFinanceiro'))
+IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteExcluirFinanceiro'))
 BEGIN
-    INSERT INTO diretivaSeguranca (nome) values ('PermiteConcluirFinanceiro')
+    INSERT INTO diretivaSeguranca (nome) values ('PermiteExcluirFinanceiro')
 END
 GO

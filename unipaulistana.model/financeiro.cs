@@ -59,8 +59,8 @@ namespace unipaulistana.model
     public enum StatusTitulo
     {
         em_aberto = 1,
-        concluido = 2
+        pago = 2,
+        vencida = 3
     }
-
 }
 

@@ -10,5 +10,6 @@ namespace unipaulistana.model
         void Adicionar(Financeiro financeiro);
         void Atualizar(Financeiro financeiro);
         void Excluir(int financeiroID);
+        IEnumerable<Financeiro> Filtrar(FinanceiroFiltrar filtrar);
     } 
 }

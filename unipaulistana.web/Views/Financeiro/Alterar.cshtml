@@ -1,0 +1,145 @@
+@model unipaulistana.model.Financeiro
+
+<br/>
+<div>
+    <a class="btn btn-primary" asp-action="Index">Voltar</a>
+</div>
+<br/>
+
+
+@Html.Partial("_ErrorSummary")
+
+
+<div class="content">
+	<div class="module">
+		<div class="module-head">
+			<h3>Inserir novo título</h3>
+		</div>
+		<div class="module-body">
+			<form asp-action="Alterar" class="form-horizontal row-fluid">
+				
+                <input type="hidden" asp-for="FinanceiroID" />
+
+				<div class="control-group">
+					<label class="control-label" asp-for="ClienteID">Cliente</label>
+					<div class="controls">
+						<select asp-for="ClienteID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarCliente,"ClienteID", "Nome"))"></select>
+						<span asp-validation-for="ClienteID" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" asp-for="Valor">Valor</label>
+					<div class="controls">
+						<input asp-for="Valor" type="text" id="Valor" placeholder="valor" class="span8" onKeyUp="maskIt(this,event,'###.###.###.##',true)">
+						<span asp-validation-for="Valor" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" asp-for="Status">Status</label>
+					<div class="controls">
+						        <select class="form-dropdown"  onchange="AlterarCor(this.value)" asp-for="Status" asp-items="Html.GetEnumSelectList<unipaulistana.model.StatusTitulo>()">
+                                </select>
+						<span asp-validation-for="Status" class="text-danger"></span>
+					</div>
+				</div>
+
+
+				<div class="control-group">
+					<label class="control-label" asp-for="DataDeVencimento">Data de vencimento</label>
+					<div class="controls">
+						<input asp-for="DataDeVencimento" type="text" id="DataDeVencimento" placeholder="data de vencimento" class="span8">
+						<span asp-validation-for="DataDeVencimento" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>				
+</div><!--/.content-->
+		
+<script>
+        const em_aberto = 1;
+        const concluido = 2;
+    
+    function AlterarCor(valor)
+    {
+        if(valor==em_aberto)
+	    {
+		    document.getElementById('Status').style.backgroundColor="red";
+	    }
+        else if(valor == concluido)
+        {
+            document.getElementById('Status').style.backgroundColor="green";
+        }
+    }
+
+    function onloadPage() {
+        this.AlterarCor(document.getElementById('Status').value);
+    }
+    
+    window.onload = onloadPage;
+
+</script>
+
+<style>
+    .form-dropdown {
+        color: #ffffff !important;
+    }
+</style>
+
+<script type="text/javascript">
+function maskIt(w,e,m,r,a){
+// Cancela se o evento for Backspace
+if (!e) var e = window.event
+if (e.keyCode) code = e.keyCode;
+else if (e.which) code = e.which;
+// Variáveis da função
+var txt  = (!r) ? w.value.replace(/[^\d]+/gi,'') : w.value.replace(/[^\d]+/gi,'').reverse();
+var mask = (!r) ? m : m.reverse();
+var pre  = (a ) ? a.pre : "";
+var pos  = (a ) ? a.pos : "";
+var ret  = "";
+if(code == 9 || code == 8 || txt.length == mask.replace(/[^#]+/g,'').length) return false;
+// Loop na máscara para aplicar os caracteres
+for(var x=0,y=0, z=mask.length;x<z && y<txt.length;){
+if(mask.charAt(x)!='#'){
+ret += mask.charAt(x); x++; } 
+else {
+ret += txt.charAt(y); y++; x++; } }
+// Retorno da função
+ret = (!r) ? ret : ret.reverse()	
+w.value = pre+ret+pos; }
+// Novo método para o objeto 'String'
+String.prototype.reverse = function(){
+return this.split('').reverse().join(''); };
+</script>
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+  <script>
+  $( function() {
+    $( "#DataDeVencimento" ).datepicker({
+		dateFormat: 'dd/mm/yy',//check change
+    	changeMonth: true,
+    	changeYear: true,
+        timepicker: false
+	});
+  } );
+  </script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
