@@ -18,18 +18,15 @@ namespace unipaulistana.web.Controllers
     public class UsuarioController : Controller
     {
         public UsuarioController(IUsuarioService usuarioService,
-                                 IDepartamentoService departamentoService,
                                  IGrupoDeSegurancaService grupoDeSegurancaService,
                                  IHostingEnvironment hostingEnvironment)
         {
             this.usuarioService = usuarioService;
             this.hostingEnvironment = hostingEnvironment;
-            this.departamentoService = departamentoService;
             this.grupoDeSegurancaService = grupoDeSegurancaService;
         }
 
         readonly IUsuarioService usuarioService;
-        readonly IDepartamentoService departamentoService;
         readonly IGrupoDeSegurancaService grupoDeSegurancaService;
         readonly IHostingEnvironment hostingEnvironment;
 
@@ -139,7 +136,6 @@ namespace unipaulistana.web.Controllers
 
         void AtualizarListas()
         {
-            ViewBag.ListarDepartamentos = this.departamentoService.ObterTodos();
             ViewBag.ListarGruposDeSeguranca = this.grupoDeSegurancaService.ObterTodos();
         }
 

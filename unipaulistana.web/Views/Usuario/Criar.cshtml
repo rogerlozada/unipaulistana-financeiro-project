@@ -31,13 +31,6 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" asp-for="Email">Departamento</label>
-					<div class="controls">
-						<select asp-for="DepartamentoID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarDepartamentos,"DepartamentoID", "Nome"))"></select>
-						<span asp-validation-for="DepartamentoID" class="text-danger"></span>
-					</div>
-				</div>
-				<div class="control-group">
 					<label class="control-label" asp-for="Email">Grupo de segurança</label>
 					<div class="controls">
 						<select asp-for="GrupoDeSegurancaID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListarGruposDeSeguranca,"GrupoDeSegurancaID", "Nome"))"></select>

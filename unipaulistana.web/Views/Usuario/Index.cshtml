@@ -29,7 +29,6 @@
                     <th>ID</th>  
                     <th>Nome</th> 
                     <th>Email</th>   
-                    <th>Departamento</th>                      
                     <th>Grupo de segurança</th>                      
                     <th></th>  
                 </tr>  
@@ -41,7 +40,6 @@
                         <td>@Html.DisplayFor(modelItem => item.UsuarioID)</td>  
                         <td>@Html.DisplayFor(modelItem => item.Nome)</td>  
                         <td>@Html.DisplayFor(modelItem => item.Email)</td>  
-                        <td>@Html.DisplayFor(modelItem => item.Departamento.Nome)</td>  
                         <td>@Html.DisplayFor(modelItem => item.GrupoDeSeguranca.Nome)</td>  
                         <td>  
                             @if(User.HasPermission("PermiteAlterarUsuario")){

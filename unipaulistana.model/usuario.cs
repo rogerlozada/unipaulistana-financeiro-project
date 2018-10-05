@@ -26,7 +26,7 @@ namespace unipaulistana.model
             this.ConfirmarSenha = senha;
         }
 
-        public Usuario(int usuarioID, string nome, string email, string senha, string foto, int departamentoID, string nomeDepartamento,
+        public Usuario(int usuarioID, string nome, string email, string senha, string foto, 
                        int grupoDeSegurancaID, string nomeGrupoSeguranca)
         {
             this.UsuarioID = usuarioID;
@@ -35,8 +35,6 @@ namespace unipaulistana.model
             this.Senha = senha;
             this.Foto = foto;
             this.ConfirmarSenha = senha;
-            this.DepartamentoID = departamentoID;
-            this.Departamento = new Departamento(departamentoID, nomeDepartamento);
             this.GrupoDeSegurancaID = grupoDeSegurancaID;
             this.GrupoDeSeguranca = new GrupoDeSeguranca(grupoDeSegurancaID, nomeGrupoSeguranca);
         }
@@ -48,10 +46,6 @@ namespace unipaulistana.model
         public string Nome { get; set; }
 
         public string Foto { get; set; }
-
-        [Display(Name="Departamento")]
-        public int DepartamentoID { get; set; }
-        public Departamento Departamento { get; set; }
 
         [Display(Name="Grupo de segurança")]
         public int GrupoDeSegurancaID { get; set; }

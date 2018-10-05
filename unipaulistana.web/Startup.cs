@@ -42,8 +42,6 @@
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IUsuarioService, UsuarioService>();
-            services.AddScoped<IDepartamentoRepository, DepartamentoRepository>();
-            services.AddScoped<IDepartamentoService, DepartamentoService>();
             services.AddScoped<IGrupoDeSegurancaRepository, GrupoDeSegurancaRepository>();
             services.AddScoped<IGrupoDeSegurancaService, GrupoDeSegurancaService>();
             services.AddScoped<IDiretivaSegurancaRepository, DiretivaSegurancaRepository>();
@@ -68,12 +66,6 @@
                 options.AddPolicy("PermiteAlterarCliente", policy=> policy.RequireClaim("PermiteAlterarCliente"));  
                 options.AddPolicy("PermiteExcluirCliente", policy=> policy.RequireClaim("PermiteExcluirCliente"));  
 
-                //direitvas de departamento
-                options.AddPolicy("PermiteListarDepartamento", policy=> policy.RequireClaim("PermiteListarDepartamento"));  
-                options.AddPolicy("PermiteCriarDepartamento", policy=> policy.RequireClaim("PermiteCriarDepartamento"));  
-                options.AddPolicy("PermiteAlterarDepartamento", policy=> policy.RequireClaim("PermiteAlterarDepartamento"));  
-                options.AddPolicy("PermiteExcluirDepartamento", policy=> policy.RequireClaim("PermiteExcluirDepartamento"));  
-               
                 //direitvas de grupo de segurança
                 options.AddPolicy("PermiteListarGrupoDeSeguranca", policy=> policy.RequireClaim("PermiteListarGrupoDeSeguranca"));  
                 options.AddPolicy("PermiteCriarGrupoDeSeguranca", policy=> policy.RequireClaim("PermiteCriarGrupoDeSeguranca"));  

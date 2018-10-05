@@ -62,32 +62,6 @@ END
 GO
 
 
--- direitvas de departamento
-
-IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteListarDepartamento'))
-BEGIN
-    INSERT INTO diretivaSeguranca (nome) values ('PermiteListarDepartamento')
-END
-GO
-
-IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteCriarDepartamento'))
-BEGIN
-    INSERT INTO diretivaSeguranca (nome) values ('PermiteCriarDepartamento')
-END
-GO
-
-IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteAlterarDepartamento'))
-BEGIN
-    INSERT INTO diretivaSeguranca (nome) values ('PermiteAlterarDepartamento')
-END
-GO
-
-IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteExcluirDepartamento'))
-BEGIN
-    INSERT INTO diretivaSeguranca (nome) values ('PermiteExcluirDepartamento')
-END
-GO
-
 -- direitvas de grupo de segurança
 
 IF (NOT EXISTS (SELECT * FROM diretivaSeguranca WHERE nome = 'PermiteListarGrupoDeSeguranca'))
